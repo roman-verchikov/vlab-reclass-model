@@ -10,25 +10,25 @@ parameters:
     cluster_elasticsearch_port: 9200
     cluster_kibana_port: 5601
     cluster_grafana_port: 3000
-    mysql_grafana_password: qqqqqqqqqqqqqqqq
+    mysql_grafana_password: MyPassword123!!
     grafana_influxdb_host: ${_param:stacklight_telemetry_address}
     elasticsearch_port: 9200
-    influxdb_stacklight_password: qqqqqqqqqqqqqqqq
-    influxdb_admin_password: qqqqqqqqqqqqqqqq
+    influxdb_stacklight_password: MyPassword123!!
+    influxdb_admin_password: MyPassword123!!
     influxdb_port: 8086
     influxdb_database: lma
     influxdb_user: lma
-    influxdb_password: qqqqqqqqqqqqqqqq
+    influxdb_password: MyPassword123!!
     nagios_host: ${_param:stacklight_monitor_address}
     nagios_status_port: 8001
     nagios_username: nagiosadmin
-    nagios_password: qqqqqqqqqqqqqqqq
+    nagios_password: MyPassword123!!
     nagios_notification_smtp_server: 127.0.0.1
     nagios_notification_from: 'nagios@localhost'
     nagios_notification_email: 'root@localhost'
-    stacklight_log_keepalived_password: qqqqqqqqqqqqqqqq
-    stacklight_monitor_keepalived_password: qqqqqqqqqqqqqqqq
-    stacklight_telemetry_keepalived_password: qqqqqqqqqqqqqqqq
+    stacklight_log_keepalived_password: MyPassword123!!
+    stacklight_monitor_keepalived_password: MyPassword123!!
+    stacklight_telemetry_keepalived_password: MyPassword123!!
     ##Billing
     #collectd_backend_carbon_host: ${_param:openstack_billing_address}
     #collectd_backend_carbon_port: 2023
