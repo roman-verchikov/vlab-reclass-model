@@ -20,46 +20,46 @@ parameters:
     nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
     primary_interface: ens3
     external_interface: ens4
- linux:
-   network:
-     bridge: openvswitch
-     interface:
-       primary_second_nic:
-         name: ${_param:primary_second_nic}
-         enabled: true
-         type: slave
-         mtu: 1500
-         master: bond0
-       bond0:
-         enabled: true
-         proto: manual
-         type: bond
-         use_interfaces:
-         - ${_param:primary_second_nic}
-         slaves: ${_param:primary_second_nic}
-         mode: active-backup
-         mtu: 1500
-       bond0.1800:
-         enabled: true
-         type: vlan
-         proto: static
-         address: ${_param:single_address}
-         netmask: 255.255.255.0
-         mtu: 1500
-         use_interfaces:
-         - bond0
-       bond0.1801:
-         enabled: true
-         type: vlan
-         proto: manual
-         mtu: 1500
-         use_interfaces:
-         - bond0
-       br-mesh:
-         enabled: true
-         type: bridge
-         address: ${_param:tenant_address}
-         netmask: 255.255.255.0
-         mtu: 1500
-         use_interfaces:
-         - bond0.1801
+  linux:
+    network:
+      bridge: openvswitch
+      interface:
+        primary_second_nic:
+          name: ${_param:primary_second_nic}
+          enabled: true
+          type: slave
+          mtu: 1500
+          master: bond0
+        bond0:
+          enabled: true
+          proto: manual
+          type: bond
+          use_interfaces:
+          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_second_nic}
+          mode: active-backup
+          mtu: 1500
+        bond0.1800:
+          enabled: true
+          type: vlan
+          proto: static
+          address: ${_param:single_address}
+          netmask: 255.255.255.0
+          mtu: 1500
+          use_interfaces:
+          - bond0
+        bond0.1801:
+          enabled: true
+          type: vlan
+          proto: manual
+          mtu: 1500
+          use_interfaces:
+          - bond0
+        br-mesh:
+          enabled: true
+          type: bridge
+          address: ${_param:tenant_address}
+          netmask: 255.255.255.0
+          mtu: 1500
+          use_interfaces:
+          - bond0.1801
