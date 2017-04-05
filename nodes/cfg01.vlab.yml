@@ -1,5 +1,5 @@
 classes:
-- cluster.vlab.infra.config
+- cluster.rverchikov-vlab.infra.config
 parameters:
   _param:
     linux_system_codename: xenial

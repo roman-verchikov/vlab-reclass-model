@@ -16,7 +16,7 @@ classes:- system.linux.system.repo.mos9
 parameters:
   _param:
     openstack_version: liberty
-    keepalived_vip_interface: eth1
+    keepalived_vip_interface: ens4
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
@@ -28,4 +28,4 @@ parameters:
   linux:
     network:
       interface:
-        eth1: ${_param:linux_single_interface}
+        ens4: ${_param:linux_single_interface}

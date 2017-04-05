@@ -30,8 +30,8 @@ parameters:
     heat_domain_admin_password: MyPassword123!!
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    ceilometer_version: ${_param:openstack_version}
-    ceilometer_service_host: ${_param:openstack_telemetry_address}
+    #ceilometer_version: ${_param:openstack_version}
+    #ceilometer_service_host: ${_param:openstack_telemetry_address}
     ceilometer_influxdb_password: MyPassword123!!
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
@@ -67,7 +67,7 @@ parameters:
     mongodb_admin_password: MyPassword123!!
     mongodb_shared_key: MyPassword123!!
     metadata_password: MyPassword123!!
-    openstack_telemetry_keepalived_password: MyPassword123!!
+    #openstack_telemetry_keepalived_password: MyPassword123!!
     # Billing
     #keystone_billometer_password: MyPassword123!!
     #keystone_billometer_address: ${_param:billometer_service_host}
@@ -155,26 +155,26 @@ parameters:
           names:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
-       mdb:
-         address: ${_param:openstack_telemetry_address}
-          names:
-          - ${_param:openstack_telemetry_hostname}
-          - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
-        mdb01:
-          address: ${_param:openstack_telemetry_node01_address}
-          names:
-          - ${_param:openstack_telemetry_node01_hostname}
-          - ${_param:openstack_telemetry_node01_hostname}.${_param:cluster_domain}
-        mdb02:
-          address: ${_param:openstack_telemetry_node02_address}
-          names:
-          - ${_param:openstack_telemetry_node02_hostname}
-          - ${_param:openstack_telemetry_node02_hostname}.${_param:cluster_domain}
-        mdb03:
-          address: ${_param:openstack_telemetry_node03_address}
-          names:
-          - ${_param:openstack_telemetry_node03_hostname}
-          - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
+#        mdb:
+#          address: ${_param:openstack_telemetry_address}
+#          names:
+#          - ${_param:openstack_telemetry_hostname}
+#          - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
+#        mdb01:
+#          address: ${_param:openstack_telemetry_node01_address}
+#          names:
+#          - ${_param:openstack_telemetry_node01_hostname}
+#          - ${_param:openstack_telemetry_node01_hostname}.${_param:cluster_domain}
+#        mdb02:
+#          address: ${_param:openstack_telemetry_node02_address}
+#          names:
+#          - ${_param:openstack_telemetry_node02_hostname}
+#          - ${_param:openstack_telemetry_node02_hostname}.${_param:cluster_domain}
+#        mdb03:
+#          address: ${_param:openstack_telemetry_node03_address}
+#          names:
+#          - ${_param:openstack_telemetry_node03_hostname}
+#          - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
         cmp01:
           address: ${_param:openstack_compute_node01_control_address}
           names:
