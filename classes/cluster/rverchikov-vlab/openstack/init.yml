@@ -14,7 +14,6 @@ parameters:
     neutron_compute_dvr: False
     neutron_compute_agent_mode: legacy
     neutron_compute_external_access: False
-#    neutron_tenant_vlan_range: "1810:1840" not needed
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: MyPassword123!!
     galera_server_admin_password: MyPassword123!!
@@ -30,9 +29,6 @@ parameters:
     heat_domain_admin_password: MyPassword123!!
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    #ceilometer_version: ${_param:openstack_version}
-    #ceilometer_service_host: ${_param:openstack_telemetry_address}
-    ceilometer_influxdb_password: MyPassword123!!
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
@@ -41,7 +37,6 @@ parameters:
     mysql_admin_user: root
     mysql_admin_password: MyPassword123!!
     mysql_cinder_password: MyPassword123!!
-    mysql_ceilometer_password: MyPassword123!!
     mysql_glance_password: MyPassword123!!
     mysql_heat_password: MyPassword123!!
     mysql_keystone_password: MyPassword123!!
@@ -49,34 +44,18 @@ parameters:
     mysql_nova_password: MyPassword123!!
     keystone_service_token: MyPassword123!!
     keystone_admin_password: MyPassword123!!
-    keystone_ceilometer_password: MyPassword123!!
     keystone_cinder_password: MyPassword123!!
     keystone_glance_password: MyPassword123!!
     keystone_heat_password: MyPassword123!!
     keystone_keystone_password: MyPassword123!!
     keystone_neutron_password: MyPassword123!!
     keystone_nova_password: MyPassword123!!
-    ceilometer_secret_key: MyPassword123!!
     horizon_version: ${_param:openstack_version}
     horizon_secret_key: MyPassword123!!
     horizon_identity_host: ${_param:openstack_control_address}
     horizon_identity_encryption: none
     horizon_identity_version: 3
-    mongodb_server_replica_set: ceilometer
-    mongodb_ceilometer_password: MyPassword123!!
-    mongodb_admin_password: MyPassword123!!
-    mongodb_shared_key: MyPassword123!!
     metadata_password: MyPassword123!!
-    #openstack_telemetry_keepalived_password: MyPassword123!!
-    # Billing
-    #keystone_billometer_password: MyPassword123!!
-    #keystone_billometer_address: ${_param:billometer_service_host}
-    #billometer_service_host: ${_param:openstack_billing_address}
-    #billometer_version: ${_param:openstack_version}
-    #billometer_secret_key: MyPassword123!!
-    #billometer_identity_password: ${_param:keystone_billometer_password}
-    #billometer_identity_host: ${_param:openstack_control_address}
-    #billometer_identity_token: ${_param:keystone_service_token}
   linux:
     network:
       host:
@@ -155,38 +134,8 @@ parameters:
           names:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
-#        mdb:
-#          address: ${_param:openstack_telemetry_address}
-#          names:
-#          - ${_param:openstack_telemetry_hostname}
-#          - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
-#        mdb01:
-#          address: ${_param:openstack_telemetry_node01_address}
-#          names:
-#          - ${_param:openstack_telemetry_node01_hostname}
-#          - ${_param:openstack_telemetry_node01_hostname}.${_param:cluster_domain}
-#        mdb02:
-#          address: ${_param:openstack_telemetry_node02_address}
-#          names:
-#          - ${_param:openstack_telemetry_node02_hostname}
-#          - ${_param:openstack_telemetry_node02_hostname}.${_param:cluster_domain}
-#        mdb03:
-#          address: ${_param:openstack_telemetry_node03_address}
-#          names:
-#          - ${_param:openstack_telemetry_node03_hostname}
-#          - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
         cmp01:
           address: ${_param:openstack_compute_node01_control_address}
           names:
           - ${_param:openstack_compute_node01_hostname}
           - ${_param:openstack_compute_node01_hostname}${_param:cluster_domain}
-        cmp02:
-          address: ${_param:openstack_compute_node02_control_address}
-          names:
-          - ${_param:openstack_compute_node02_hostname}
-          - ${_param:openstack_compute_node02_hostname}.${_param:cluster_domain}
-        cmp03:
-          address: ${_param:openstack_compute_node03_control_address}
-          names:
-          - ${_param:openstack_compute_node03_hostname}
-          - ${_param:openstack_compute_node03_hostname}.${_param:cluster_domain}

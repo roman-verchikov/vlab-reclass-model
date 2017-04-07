@@ -5,24 +5,22 @@ classes:
 - system.openssh.server.team.tcpcloud
 - cluster.rverchikov-vlab.infra
 - cluster.rverchikov-vlab.openstack
-- cluster.rverchikov-vlab.stacklight
-- cluster.rverchikov-vlab.stacklight.client
 parameters:
   _param:
     openstack_version: mitaka
     cluster_domain: rverchikov-vlab.local
-    stacklight_environment: ${_param:cluster_domain}
     reclass_data_revision: master
     cluster_name: rverchikov-vlab
     cluster_public_host: rverchikov-vlab
     infra_config_hostname: cfg01
+    primary_second_nic: ens3
     ##local repositiry for aptly
     #local_repo_url: ip_address
     #linux_repo_refresh_db: True
 
     # infra service addresses
-    infra_config_address: 10.167.4.90
-    infra_config_deploy_address: 10.167.5.90
+    infra_config_address: 10.110.0.84
+    infra_config_deploy_address: 10.110.0.84
 
     openstack_gateway_node01_address: 10.167.4.224
     openstack_gateway_node02_address: 10.167.4.225
@@ -35,15 +33,9 @@ parameters:
     openstack_gateway_node03_hostname: gtw03
 
     infra_compute_address: 10.167.4.240
-    infra_compute_node01_address: 10.167.4.241
-    infra_compute_node02_address: 10.167.4.242
-    infra_compute_node03_address: 10.167.4.243
+    infra_compute_node01_address: 10.110.0.114
     infra_compute_node01_deploy_address: 10.167.5.241
-    infra_compute_node02_deploy_address: 10.167.5.242
-    infra_compute_node03_deploy_address: 10.167.5.243
     infra_compute_node01_hostname: kvm01
-    infra_computenode02_hostname: kvm02
-    infra_compute_node03_hostname: kvm03
 
     # openstack service addresses
     openstack_proxy_address: 10.167.4.80
@@ -70,30 +62,11 @@ parameters:
     # Billing
     # openstack_billing_address:
 
-    # Stacklight Monitor
-    stacklight_monitor_address: 10.167.4.70
-    stacklight_monitor_node01_address: 10.167.4.71
-    stacklight_monitor_node02_address: 10.167.4.72
-    stacklight_monitor_node03_address: 10.167.4.73
-    stacklight_log_address: 10.167.4.60
-    stacklight_log_node01_address: 10.167.4.61
-    stacklight_log_node02_address: 10.167.4.62
-    stacklight_log_node03_address: 10.167.4.63
-    stacklight_telemetry_address: 10.167.4.85
-    stacklight_telemetry_node01_address: 10.167.4.86
-    stacklight_telemetry_node02_address: 10.167.4.87
-    stacklight_telemetry_node03_address: 10.167.4.88
 
     # OpenStack Compute
     openstack_compute_node01_single_address: 10.167.2.101
-    openstack_compute_node02_single_address: 10.167.2.102
-    openstack_compute_node03_single_address: 10.167.2.103
     openstack_compute_node01_control_address: 10.167.4.101
-    openstack_compute_node02_control_address: 10.167.4.102
-    openstack_compute_node03_control_address: 10.167.4.103
     openstack_compute_node01_tenant_address: 10.167.6.101
-    openstack_compute_node02_tenant_address: 10.167.6.102
-    openstack_compute_node03_tenant_address: 10.167.6.103
 
 
     # openstack service hostnames
@@ -112,20 +85,6 @@ parameters:
     openstack_message_queue_node01_hostname: msg01
     openstack_message_queue_node02_hostname: msg02
     openstack_message_queue_node03_hostname: msg03
-
-    # stacklight service hostnames
-    stacklight_monitor_hostname: mon
-    stacklight_monitor_node01_hostname: mon01
-    stacklight_monitor_node02_hostname: mon02
-    stacklight_monitor_node03_hostname: mon03
-    stacklight_log_hostname: log
-    stacklight_log_node01_hostname: log01
-    stacklight_log_node02_hostname: log02
-    stacklight_log_node03_hostname: log03
-    stacklight_telemetry_hostname: mtr
-    stacklight_telemetry_node01_hostname: mtr01
-    stacklight_telemetry_node02_hostname: mtr02
-    stacklight_telemetry_node03_hostname: mtr03
 
     # openstack compute
     openstack_compute_node01_hostname: cmp001

@@ -2,11 +2,11 @@ classes:
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.tcp_base
 - system.influxdb.server.single
-- system.influxdb.database.ceilometer
-- system.influxdb.database.stacklight
-- system.haproxy.proxy.listen.stacklight.influxdb
+#- system.influxdb.database.ceilometer
+#- system.influxdb.database.stacklight
+#- system.haproxy.proxy.listen.stacklight.influxdb
 - service.haproxy.proxy.single
-- system.keepalived.cluster.instance.stacklight_telemetry_vip
+#- system.keepalived.cluster.instance.stacklight_telemetry_vip
 - cluster.rverchikov-vlab
 parameters:
   _param:

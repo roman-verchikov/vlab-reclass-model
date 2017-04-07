@@ -4,8 +4,8 @@ classes:
 
 - system.linux.system.repo.tcp_extra
 - system.linux.system.repo.saltstack_2016_3_trusty
-- system.ceilometer.client
-- system.ceilometer.client.neutron
+#- system.ceilometer.client
+#- system.ceilometer.client.neutron
 - system.memcached.server.single
 - system.keystone.server.cluster
 - system.glance.control.cluster

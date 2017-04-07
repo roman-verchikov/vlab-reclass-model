@@ -1,5 +1,5 @@
-classes:- system.linux.system.repo.mos9
-
+classes:
+- system.linux.system.repo.mos9
 - system.linux.system.repo.tcp_base
 - system.linux.system.repo.tcp_mk20
 - system.nginx.server.single
@@ -12,7 +12,6 @@ classes:- system.linux.system.repo.mos9
 - service.keepalived.cluster.single
 - cluster.rverchikov-vlab
 - cluster.rverchikov-vlab.openstack.dashboard
-- cluster.rverchikov-vlab.stacklight.proxy
 parameters:
   _param:
     openstack_version: liberty

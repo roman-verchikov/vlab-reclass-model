@@ -5,7 +5,7 @@ classes:
 - system.linux.system.repo.saltstack_2016_3_trusty
 - system.nova.compute.cluster
 - system.neutron.compute.cluster
-- system.ceilometer.agent.cluster
+# - system.ceilometer.agent.cluster
 - cluster.rverchikov-vlab
 parameters:
   _param:
