@@ -1,14 +1,12 @@
 classes:
 - system.horizon.server.single
-- system.horizon.server.plugin.theme
-- system.horizon.server.plugin.overrides
+#- system.horizon.server.plugin.theme
 - cluster.rverchikov-vlab
 parameters:
   _param:
     horizon_site_branding: OpenStack Dashboard
-    horizon_dashboard_theme: mirantis
-    openstack_version: liberty
+    # horizon_dashboard_theme: mirantis
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        eth1: ${_param:linux_single_interface}

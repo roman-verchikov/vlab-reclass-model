@@ -1,13 +1,17 @@
 classes:
-- system.linux.system.repo.mos9
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.openstack
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
+- system.linux.system.repo.saltstack.xenial
+- system.aodh.server.cluster
 - system.ceilometer.server.cluster
 - cluster.rverchikov-vlab
 parameters:
   _param:
-    keepalived_vip_interface: ens4
-    keepalived_vip_virtual_router_id: 230
+    keepalived_openstack_telemetry_vip_address: ${_param:openstack_telemetry_address}
+    keepalived_openstack_telemetry_vip_password: ${_param:openstack_telemetry_keepalived_password}
+    keepalived_openstack_telemetry_vip_interface: ens3
     cluster_vip_address: ${_param:openstack_telemetry_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: mdb01
@@ -19,4 +23,4 @@ parameters:
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

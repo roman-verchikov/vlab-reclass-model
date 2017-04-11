@@ -22,6 +22,22 @@ parameters:
     infra_config_address: 10.110.0.84
     infra_config_deploy_address: 10.110.0.84
 
+    # SHA-512 hash for 'MyPassword123' password with 'HCdKRF5d' salt
+    # generated with `python -c 'import crypt; print crypt.crypt("MyPassword123", "$6$HCdKRF5d$")'`
+    salt_api_password_hash: $6$HCdKRF5d$5i9/1s0WADZNrUuxcf88Jcgy6U0R2P5hm7t12em6Z9XAPnYv6gBmEUXP1wkphsTcUnWmsYY4e1Ygeyj53h9aR1
+
+    infra_kvm_address: 10.100.0.117
+
+    control_vlan: 10
+    tenant_vlan: 20
+    control_network_netmask: 255.255.255.0
+    tenant_network_netmask: 255.255.255.0
+    dns_server01: 8.8.8.8
+    dns_server02: 8.8.4.4
+    deploy_network_netmask: 255.255.255.0
+    deploy_network_gateway: 
+    tenant_network_gateway: 
+
     openstack_gateway_node01_address: 10.167.4.224
     openstack_gateway_node02_address: 10.167.4.225
     openstack_gateway_node03_address: 10.167.4.226
@@ -32,10 +48,16 @@ parameters:
     openstack_gateway_node02_hostname: gtw02
     openstack_gateway_node03_hostname: gtw03
 
-    infra_compute_address: 10.167.4.240
-    infra_compute_node01_address: 10.110.0.114
-    infra_compute_node01_deploy_address: 10.167.5.241
+    infra_compute_address: 10.100.0.117
+    infra_compute_node01_address: 10.100.0.117
+    infra_compute_node02_address: 10.100.0.143
+    infra_compute_node03_address: 10.100.0.203
+    infra_compute_node01_deploy_address: 10.110.0.45
+    infra_compute_node02_deploy_address: 10.110.0.27
+    infra_compute_node03_deploy_address: 10.110.0.229
     infra_compute_node01_hostname: kvm01
+    infra_compute_node02_hostname: kvm02
+    infra_compute_node03_hostname: kvm03
 
     # openstack service addresses
     openstack_proxy_address: 10.167.4.80
@@ -53,11 +75,6 @@ parameters:
     openstack_message_queue_node01_address: 10.167.4.41
     openstack_message_queue_node02_address: 10.167.4.42
     openstack_message_queue_node03_address: 10.167.4.43
-
-    openstack_telemetry_address: 10.167.4.75
-    openstack_telemetry_node01_address: 10.167.4.76
-    openstack_telemetry_node02_address: 10.167.4.77
-    openstack_telemetry_node03_address: 10.167.4.78
 
     # Billing
     # openstack_billing_address:

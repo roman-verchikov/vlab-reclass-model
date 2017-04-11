@@ -1,106 +1,142 @@
 classes:
-
-- system.linux.system.repo.mos9
-
-- system.linux.system.repo.saltstack_2016_3_trusty
-- system.glusterfs.server.volume.glance
-- system.glusterfs.server.volume.keystone
+- system.linux.system.repo.mos92
+- service.keepalived.cluster.single
 - system.glusterfs.server.cluster
 - system.salt.control.virt
+- system.glusterfs.server.volume.glance
+- system.glusterfs.server.volume.keystone
 - system.salt.control.cluster.openstack_control_cluster
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
+#- system.salt.control.cluster.openstack_telemetry_cluster
+#- system.salt.control.cluster.cicd_control_cluster
+#- cluster.rverchikov-vlab.cicd.gluster
 - cluster.rverchikov-vlab
 parameters:
   _param:
-    cluster_vip_address: ${_param:infra_compute_address}
-    cluster_node01_address: ${_param:infra_compute_node01_address}
-    cluster_node02_address: ${_param:infra_compute_node02_address}
-    cluster_node03_address: ${_param:infra_compute_node03_address}
-    keepalived_vip_interface: ens4
+    cluster_vip_address: ${_param:infra_kvm_address}
+    cluster_node01_address: ${_param:infra_kvm_node01_address}
+    cluster_node02_address: ${_param:infra_kvm_node02_address}
+    cluster_node03_address: ${_param:infra_kvm_node03_address}
+    keepalived_vip_interface: br_ctl
     keepalived_vip_virtual_router_id: 69
+    deploy_nic: ens4
+    primary_first_nic: ens3
+    primary_second_nic: ens5
   salt:
     control:
-      size:
-      # Default production sizing
+      size: #RAM 4096,8192,16384,32768,65536
+      ##Default production sizing
         openstack.control:
-          cpu: 4
-          ram: 8192
+          cpu: 8
+          ram: 32768
           disk_profile: small
           net_profile: default
         openstack.database:
-          cpu: 2
-          ram: 4096
+          cpu: 8
+          ram: 16384
           disk_profile: large
           net_profile: default
         openstack.message_queue:
-          cpu: 2
-          ram: 4096
+          cpu: 8
+          ram: 32768
           disk_profile: small
           net_profile: default
         openstack.proxy:
-          cpu: 2
-          ram: 2048
+          cpu: 4
+          ram: 8192
           disk_profile: small
-          net_profile: default
-        opencontrail.control:
-          cpu: 2
-          ram: 4096
-          disk_profile: small
-          net_profile: default
-        opencontrail.analytics:
-          cpu: 2
-          ram: 4096
-          disk_profile: large
           net_profile: default
       cluster:
         internal:
           node:
             prx02:
-              provider: kvm03.${_param:cluster_domain}
-#FIXME - done
+              provider: ${_param:infra_compute_node03_address}.${_param:cluster_domain}
+            mdb01:
+              image: ${_param:salt_control_xenial_image}
+            mdb02:
+              image: ${_param:salt_control_xenial_image}
+            mdb03:
+              image: ${_param:salt_control_xenial_image}
+  virt:
+    nic:
+      default:
+        eth2:
+          bridge: br_mgm
+        eth1:
+          bridge: br_ctl
   linux:
     network:
       interface:
-        ens3:
+        eth0:
           enabled: true
           type: eth
           proto: manual
-        ens4:
+          name: ${_param:deploy_nic}
+        eth1:
           enabled: true
-          type: eth
+          type: slave
           proto: manual
-        ens5:
+          name: ${_param:primary_first_nic}
+          master: bond0
+        eth2:
           enabled: true
-          type: eth
+          type: slave
           proto: manual
+          name: ${_param:primary_second_nic}
+          master: bond0
         br_mgm:
           enabled: true
           proto: static
           type: bridge
           address: ${_param:deploy_address}
-          netmask: 255.255.255.0
+          netmask: ${_param:deploy_network_netmask}
+          gateway: ${_param:deploy_network_gateway}
+          name_servers:
+          - ${_param:dns_server01}
+          - ${_param:dns_server02}
           use_interfaces:
-          - ens3
+          - ${_param:deploy_nic}
         bond0:
           enabled: true
           proto: manual
           type: bond
           use_interfaces:
-          - ens4
-          - ens5
-          slaves: ens4 ens5
+          - ${_param:primary_first_nic}
+          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
           mode: active-backup
+        bond0.1:
+          name: bond0.${_param:control_vlan}
+          enabled: true
+          proto: manual
+          type: vlan
+          use_interfaces:
+          - bond0
         br_ctl:
           enabled: true
           type: bridge
           proto: static
           address: ${_param:single_address}
-          gateway: 10.167.4.1
-          netmask: 255.255.255.0
-          name_servers:
-          - 8.8.8.8
-          - 8.8.4.4
+          netmask: ${_param:control_network_netmask}
           use_interfaces:
-          - bond0
+          - bond0.${_param:control_vlan}
+  #   system:
+  #     package:
+  #       linux-image-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39-generic:
+  #         version: latest
+  #       linux-image-extra-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39:
+  #         version: latest
+  #     user:
+  #       root:
+  #         enabled: true
+  #         name: root
+  #         home: /root
+  #         # Password is cloudlab, comment out, configure your SSH key bellow
+  #         # and disable password auth
+  #         password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./

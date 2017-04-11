@@ -1,7 +1,7 @@
 classes:
-- system.linux.system.repo.mos9
-- system.linux.system.repo.tcp_base
-- system.linux.system.repo.tcp_mk20
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.saltstack.trusty
 - system.nginx.server.single
 - system.nginx.server.proxy.openstack_api
 - system.nginx.server.proxy.openstack_vnc
@@ -14,12 +14,11 @@ classes:
 - cluster.rverchikov-vlab.openstack.dashboard
 parameters:
   _param:
-    openstack_version: liberty
-    keepalived_vip_interface: ens4
+    keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
-      authority: mk_lab_ca
+      authority: ${_param:salt_minion_ca_authority}
       engine: salt
       mode: secure
     cluster_vip_address: ${_param:openstack_proxy_address}
@@ -27,4 +26,4 @@ parameters:
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        eth1: ${_param:linux_single_interface}
